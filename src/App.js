@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import Main from './components/Main';
+import HomePage from './components/pages/HomePage';
+import OnePage from './components/pages/OnePage';
+import NotFound from './components/pages/NotFound';
+import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+
 
 function App() {
+  const [countris, setCountris] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Main>
+       <Routes>
+        <Route exact path='/' element={<HomePage countris={countris} setCountris={setCountris}/>}></Route>
+        <Route path='/country/:name' Component={OnePage}></Route>
+        <Route Component={NotFound}></Route>
+       </Routes>
+      </Main>
     </div>
   );
 }
